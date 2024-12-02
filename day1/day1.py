@@ -1,6 +1,6 @@
 filename = "day1task.txt"
 
-distances, left_list, right_list = [], [], []
+distances, left_list, right_list, occurences = [], [], [], []
 
 with open(filename, "r", encoding="UTF-8") as file:
     while line := file.readline():
@@ -14,4 +14,13 @@ right_list.sort(key=lambda x: x, reverse=False)
 for i, num in enumerate(left_list):
     distances.append(abs(num - right_list[i]))
 
-print(sum((distances)))
+
+occurence = {num: right_list.count(num) for num in left_list}
+
+for k, v in occurence.items():
+    occurences.append(k * v)
+
+print(
+    f"""Distance between points: {sum(distances)}
+Sum of repetitions: {sum(occurences)}"""
+)
